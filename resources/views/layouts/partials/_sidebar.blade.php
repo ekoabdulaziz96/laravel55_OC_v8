@@ -129,9 +129,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id="ftAdminLaporan_baru"><a href="{{ route('ft-admin.laporan.baru') }}"><i class="fa fa-pencil-square-o"></i>Laporan Baru</a></li>         
-              <li id="ftAdminLaporan_proses"><a href="{{ route('ft-admin.laporan.proses') }}"><i class="fa fa-paper-plane-o"></i>Proses Persetujuan</a></li>      
+              <li id="ftAdminLaporan_baru"><a href="{{ route('ft-admin.laporan.baru') }}"><i class="fa fa-pencil-square-o"></i>Laporan Baru</a></li>        
               <li id="ftAdminLaporan_perbaikan"><a href="{{ route('ft-admin.laporan.perbaikan') }}"><i class="fa fa-wrench"></i>Laporan Perbaikan</a></li>
+               <li id="ftAdminLaporan_proses"><a href="{{ route('ft-admin.laporan.proses') }}"><i class="fa fa-paper-plane-o"></i>Proses Persetujuan</a></li>  
               <li id="ftAdminLaporan_disetujui"><a href="{{ route('ft-admin.laporan.disetujui') }}"><i class="fa fa-check-square-o"></i>Laporan Disetujui</a></li>
 
             </ul>

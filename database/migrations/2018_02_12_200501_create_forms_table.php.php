@@ -16,10 +16,11 @@ class CreateFormsTable extends Migration
         Schema::create('form', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('urutan');
-            $table->string('nama',30);
-            $table->string('slug',50);
+            $table->string('nama',52);
+            $table->string('slug',52);
             $table->string('tipe',30);
             $table->string('status',30);
+            $table->string('kategori',30);
             $table->string('view',30);
 
             $table->timestamps();

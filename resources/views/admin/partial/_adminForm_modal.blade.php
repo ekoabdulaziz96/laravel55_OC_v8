@@ -11,9 +11,25 @@
                     <h3 class="modal-title text-center" ></h3>
                 </div>
                 <div class="modal-body">
+
+
                     <input type="hidden" id="id" name="id">
                     {{-- input form --}}
                    <span id="form-input">
+                    <div class="form-group" >
+                        <label for="view" class="col-md-2  col-md-offset-1">View : </label>
+                        <div class="col-md-8" >
+                            <span id="view">
+                              {{-- <label class="form-control" > --}}
+                                <input type="radio" name="view" id="view1" value="show"  >Show 
+                                &emsp;&emsp;&emsp;
+                                <input type="radio" name="view" id="view2"  value="hidden" >Hidden 
+
+                            </span>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                     </div> 
+
                     <div class="form-group">
                           <label for="status" class="col-md-2 col-md-offset-1">Status :</label>
                           <div class="col-md-8">
@@ -23,13 +39,15 @@
                      </div>
                         
                       <div class="form-group">
-                          <label for="view" class="col-md-2  col-md-offset-1">View : </label>
+                          <label for="kategori" class="col-md-2  col-md-offset-1">kategori : </label>
                           <div class="col-md-8" >
-                              <span id="view">
+                              <span id="kategori">
                                 {{-- <label class="form-control" > --}}
-                                  <input type="radio" name="view" id="view1" value="show"  >Show 
+                                  <input type="radio" name="kategori" id="kategori1" value="formula_pagi"  >Formula Pagi 
                                   &emsp;&emsp;&emsp;
-                                  <input type="radio" name="view" id="view2"  value="hidden" >Hidden 
+                                  <input type="radio" name="kategori" id="kategori2"  value="formula_inti" >Formula Inti
+                                   &emsp;&emsp;&emsp;
+                                  <input type="radio" name="kategori" id="kategori3"  value="formula_sore" >Formula Sore  
 
                               </span>
                               <span class="help-block with-errors"></span>
@@ -39,14 +57,14 @@
                      <div class="form-group">
                           <label for="urutan" class="col-md-2 col-md-offset-1">Urutan :</label>
                           <div class="col-md-8">
-                              <input type="text" id="urutan" name="urutan" class="form-control" autofocus required>
+                              <input type="text" id="urutan" name="urutan" class="form-control" autofocus required pattern="[0-9]{1,3}" title="hanya angka 0-9, maks 999">
                               <span class="help-block with-errors"></span>
                           </div>
                       </div> 
                        <div class="form-group">
                           <label for="nama" class="col-md-2  col-md-offset-1">Nama : </label>
                           <div class="col-md-8">
-                              <input type="text" id="nama" name="nama" class="form-control"  autofocus required >
+                              <input type="text" id="nama" name="nama" class="form-control"  autofocus required pattern="[a-zA-Z_ 0-9].{1,40}" title="pastikan tidak lebih dr 40 karakter">
                               <span class="help-block with-errors"></span>
                           </div>
                         </div> 
@@ -89,9 +107,10 @@
                         {{-- pilihan --}}
                         <span id="pilihan-set">
                         </span>
- 
-
-           
+                       
+                       <div class="alert alert-default " style="background-color: #FFCA59;" id="form-warning" align="justify">
+                          <p>Perhatian ! harap diperhatikan pada saat memasukkan pilihan untuk checkbox, select dan radio untuk <b>menggunakan huruf(a-z, A-Z), angka(0-9) dan spasi.</b> Tidak sarankan untuk <b>menggukan karakter seperti : {. , / - _ },</b> karena akan menimbulkan kegagalan beberapa fungsi. Terima Kasih </p>
+                        </div>
                     </span>
                     {{-- end input form --}}
 

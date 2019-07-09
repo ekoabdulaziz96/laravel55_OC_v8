@@ -23,12 +23,6 @@
       <div class="panel panel-default">
       <div class="panel-heading">
          <i style="font-size: 20px">Kelola Form <u >{{ $user->status }}</u></i>
-{{--          @foreach ($forms as $form)
-           {{ $form->nama }}
-         @endforeach --}}
-
-       
-          {{-- <a href='#'  style="float: right;" ><i class='fa fa-plus-square fa-2x' data-target="#ModalAdd" data-toggle="modal"></i></a> --}}
           
         <div class="pull-right box-tools">
                 <button type="button" class="btn btn-basic btn-sm" data-widget="collapse" data-toggle="tooltip"
@@ -45,18 +39,22 @@
     
       <div class="panel-body">
         <div class="table-responsive">
-            {{-- <table id="Form-table" class="table table-striped table-responsive table-bordered table-hover"> --}}
             <table id="form-table"  class="display responsive nowrap table  table-responsive table-bordered "  width="100%" >
                         <thead >
                             <tr class="bg-green color-palette">
                                 <th width="5%">No</th>
-                                <th width="20%">Tgl laporan (th-bln-hr)</th>
+                                <th width="20%">Tanggal Laporan</th>
                                 <th  width="20%">Kedaluwarsa</th>
-                                <th  width="20%">Status Laporan</th>
-                                <th  width="20%">Acc Status Laporan</th>
+                                <th  width="15%">Status Laporan</th>
+                                <th  width="10%">Kirim</th>
+                                <th  width="15%">Acc Laporan</th>
                                 <th class="text-center "  width="15%" >
-                         <a onclick="addLaporan()" class="btn btn-success btn-sm" style="width: 100% ;background-color: #14CA77" data-toggle="tooltip" data-placement="top" title="Tambah"><i class="glyphicon glyphicon-plus"></i></a>
-                         {{-- <a href="{{ url('admin/form/create') }}" class="btn btn-success btn-sm" style="width: 100% ;"><i class="glyphicon glyphicon-plus"></i></a> --}}
+                                  @if ($status_laporan == 'baru')
+                                     <a onclick="addLaporan()" class="btn btn-success btn-sm" style="width: 100% ;background-color: #14CA77" data-toggle="tooltip" data-placement="top" title="Tambah"><i class="glyphicon glyphicon-plus"></i></a>
+                                  @else
+                                     <a href="#" class="btn btn-default btn-sm" style="width: 100%" data-toggle="tooltip" data-placement="top" title="Tambah"><i class="glyphicon glyphicon-plus"></i></a>
+                                  @endif
+                        
                                 </th>
                             </tr>
                         </thead>
@@ -104,9 +102,10 @@
                       ajax: "{{ route('api.ft-admin.laporan',$status_laporan) }}",
                       columns: [
                         {data: 'nomor', name: 'nomor'},
-                        {data: 'created', name: 'created'},
+                        {data: 'created_at', name: 'created_at'},
                         {data: 'expired', name: 'expired'},
                         {data: 'status_laporan', name: 'status_laporan'},
+                        {data: 'kirim', name: 'kirim'},
                         {data: 'acc_laporan', name: 'acc_laporan'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                       ]
@@ -115,10 +114,10 @@
 
  $(function () {
     //Flat red color scheme for iCheck
-    $('input[type="checkbox"], input[type="radio"]').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass   : 'iradio_flat-green'
-    })
+    // $('input[type="checkbox"], input[type="radio"]').iCheck({
+    //   checkboxClass: 'icheckbox_flat-green',
+    //   radioClass   : 'iradio_flat-green'
+    // })
     $("tr:odd").addClass("odd");
     $("tr:even").addClass("even");
   });
@@ -132,8 +131,8 @@
   document.getElementById("ftAdminLaporan_proses").setAttribute("class","active");
   }else    if ('{{ $status_laporan }}' == 'perbaikan'){
   document.getElementById("ftAdminLaporan_perbaikan").setAttribute("class","active");
-  }else    if ('{{ $status_laporan }}' == 'distujui'){
-  document.getElementById("ftAdminLaporan_distujui").setAttribute("class","active");
+  }else    if ('{{ $status_laporan }}' == 'disetujui'){
+  document.getElementById("ftAdminLaporan_disetujui").setAttribute("class","active");
   }
 </script>
 @include('ft-admin/partial/_ftAdminLaporan_script')

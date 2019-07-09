@@ -100,7 +100,9 @@ Route::get('api/kategori', 'KategoriController@apiKategori')->name('api.kategori
   Route::get('ft-admin/laporan-proses', 'FtAdminController@laporanProses')->name('ft-admin.laporan.proses');
   Route::get('ft-admin/laporan-perbaikan', 'FtAdminController@laporanPerbaikan')->name('ft-admin.laporan.perbaikan');
   Route::get('ft-admin/laporan-disetujui', 'FtAdminController@laporanDisetujui')->name('ft-admin.laporan.disetujui');
-  Route::get('ft-admin/cek/cek', 'FtAdminController@cek')->name('cek');
+
+  Route::get('ft-admin/laporan/acc-lapor/{id}', 'FtAdminController@acc')->name('ft-admin.laporan.acc-kacab');
+  // Route::get('ft-admin/cek/cek', 'FtAdminController@cek')->name('cek');
 
 
   // -----------------------------------------------------------------------
@@ -180,12 +182,32 @@ use Carbon\Carbon;
     // $b = Carbon::now();
     // return  $a->diffInDays($b).$a.$b;
 
-            $input['expired_at'] = Carbon::now()->addDays(7);
-            $input['status_laporan'] = "baru";
+            // $input['expired_at'] = Carbon::now()->addDays(7);
+            // $input['status_laporan'] = "baru";
 
-            $user = User::findOrFail(2);
-            $user->ftAdmin()->create($input);
-            return 'cek';
+            // $user = User::findOrFail(2);
+            // $user->ftAdmin()->create($input);
+            // return 'cek';
+
+            // $laporan = FtAdmin::findOrFail(9);
+            // if($laporan->expired_at->day - $laporan->created_at->day > 0){
+            //     return Carbon::now()->day;
+            // }else {
+            //   return 'false';
+            // }
+
+            $laporan = FtAdmin::findOrFail(1);
+
+          $forms = Form::where('status','ft_admin')->where('view','show')->where('tipe','checkbox')->get();
+            foreach ($forms as $form) {
+              $nama = $form->nama;
+              return $nama;
+                // if($form->tipe =='checkbox'){
+                //     for($i=0;$i<count($request->$nama);$i++){
+                //         $input[$form->nama] = $request->$nama[$i];      
+                //     }
+                // }
+            }
 
 });
 

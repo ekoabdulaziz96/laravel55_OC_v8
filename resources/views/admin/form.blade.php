@@ -48,9 +48,10 @@
                             <tr class="bg-green color-palette">
                                 <th width="5%">No</th>
                                 <th width="10%">Urutan</th>
-                                <th  width="30%">Nama</th>
-                                <th  width="20%">Tipe</th>
-                                <th  width="20%">View</th>
+                                <th  width="29%">Nama</th>
+                                <th  width="13%">Tipe</th>
+                                <th  width="13%">View</th>
+                                <th  width="15%">Kategori</th>
                                 <th class="text-center "  width="15%" >
                          <a onclick="addForm()" class="btn btn-success btn-sm" style="width: 100% ;background-color: #14CA77" data-toggle="tooltip" data-placement="top" title="Tambah"><i class="glyphicon glyphicon-plus"></i></a>
                          {{-- <a href="{{ url('admin/form/create') }}" class="btn btn-success btn-sm" style="width: 100% ;"><i class="glyphicon glyphicon-plus"></i></a> --}}
@@ -95,7 +96,7 @@
 @endif
     <script type="text/javascript">
       var table = $('#form-table').DataTable({
-                      processing: false,
+                      processing: true,
                       serverSide: true,
                       responsive: true,
                       ajax: "{{ route('api.form',$status) }}",
@@ -105,6 +106,7 @@
                         {data: 'nama', name: 'nama'},
                         {data: 'tipe', name: 'tipe'},
                         {data: 'view', name: 'view'},
+                        {data: 'kategori', name: 'kategori'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                       ]
                     });
@@ -120,8 +122,7 @@
     $("tr:even").addClass("even");
   });
 
-</script>
-<script>
+
   document.getElementById("adminForm").setAttribute("class","active");
   if ('{{ $status }}' == 'ft_admin'){
   document.getElementById("ft_admin").setAttribute("class","active");

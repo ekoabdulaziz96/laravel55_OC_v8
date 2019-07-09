@@ -1,3 +1,52 @@
+<style>
+    .container {
+      position: relative;
+      width: 50%;
+      max-width: 400px;
+      height: auto;
+      /*background-color: black;*/
+      
+    }
+
+    .image {
+      display: block;
+      width: 50%;
+      height: auto;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: .3s ease;
+      /*background-color: red;*/
+    }
+
+    .container:hover .overlay {
+      opacity: 1;
+    }
+
+    .icon {
+      color:  #AFAAAA;
+      font-size: 100px;
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .fa-download:hover {
+      color: #EEEEEE;
+    }
+</style>
+
 {{-- form model --}}
 <div class="modal fade" id="modal-form" tabindex="1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-lg">
@@ -65,16 +114,27 @@
                       <div id="form_wilayah" >
 
                       </div>                          
-                      <div class="form-group">
+                      <div class="form-group" >
                           <label for="foto" class="col-md-2 col-md-offset-1">Foto :</label>
-                          <div class="col-md-5">
+                          <div class="col-md-8">
                               <input type="file" id="foto" name="foto" class="form-control" onchange="readURL(this);" >
                               <span class="help-block with-errors"></span>
-                          </div><img id="admin_foto" src="#" alt="belum ada gambar"  width="150" height="200"/>
+                          </div >
+
+                          {{-- <img id="admin_foto" src="#" alt="belum ada gambar"  width="150" height="200"/> --}}
                       </div> 
+                         <div class="container" align="center">
+                            <img id="admin_foto" src="#" alt="belum ada gambar"  class="image">
+                            <span class="overlay" id="admin_foto_download">
+                              <a id="admin_foto_download_link" href="#" class="icon" title="download gambar" download>
+                                <i class="fa fa-download" ></i>
+                              </a>
+                            </span>
+                          </div >
            
                     </span>
                     {{-- end input form --}}
+                    
                     {{-- show form --}}
                    <span id="form-show">
                        
@@ -113,10 +173,18 @@
                                 <td width="30%" align="center">Foto</td>
                                 <td width="3%" align="center">:</td>
                                 <td  width="67%" >
-                                  <span align="center">
+{{--                                   <span align="center">
                                     <img class="rounded-square pull-center" align="center" width="30%" height="20%" src="" alt="" id="form-show-foto-src">
                                     </span>
-                                    <span id="form-show-foto"></span>
+                                    <span id="form-show-foto"></span> --}}
+                                     <div class="container" align="center" style="margin-left: -12%">
+                                      <img id="form-show-foto-src" src="#" alt="belum ada gambar"  class="image">
+                                      <span class="overlay" id="form_show_foto_download">
+                                        <a id="form_show_foto_download_link" href="#" class="icon" title="download gambar" download>
+                                          <i class="fa fa-download" ></i>
+                                        </a>
+                                      </span>
+                                  </div>
                                 </td>
                               </tr>                               
                            </table>

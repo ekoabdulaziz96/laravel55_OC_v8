@@ -7,8 +7,8 @@
                 reader.onload = function (e) {
                     $('#admin_foto')
                         .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+                        // .width(150)
+                        // .height(200);
                 };
 
                 reader.readAsDataURL(input.files[0]);
@@ -81,11 +81,8 @@
                       alert("Nothing Data");
                   }
                 });
-
-               
             });
-
-
+           $('#admin_foto_download').hide(); 
       }
 
       function editUser(id) {
@@ -130,8 +127,11 @@
             $('#status').val(data.status);
               if(data.foto != '-'){
                 $('#admin_foto').attr('src',data.foto); 
+                $('#admin_foto_download').show(); 
+                $('#admin_foto_download_link').attr('href',data.foto); 
               }else {
                 $('#admin_foto').attr('src',''); 
+                $('#admin_foto_download').hide(); 
               }
 
 
@@ -240,10 +240,15 @@ function showUser(id) {
               if(data.foto == '-'){
                 $('#form-show-foto').text(data.foto);
                 $('#form-show-foto-src').attr('src','');
+                // $('#admin_foto_download').hide(); 
+
               }else{
                 $('#form-show-foto').text('');
                 $('#form-show-foto-src').attr('src',data.foto); 
+                // $('#admin_foto_download').show(); 
+                $('#form_show_foto_download_link').attr('href',data.foto); 
               }
+               
             $('#button-submit').hide();
           },
           error : function() {

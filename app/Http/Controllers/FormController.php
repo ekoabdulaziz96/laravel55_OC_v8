@@ -83,7 +83,7 @@ class FormController extends Controller
                 $textarea = ["row"=> 2];
             }
 
-            $form =  $request->only(['nama','tipe','status','view']);
+            $form =  $request->only(['nama','tipe','status','view','kategori']);
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
             }else {
@@ -101,7 +101,7 @@ class FormController extends Controller
             //     }
             // }
 
-            $form =  $request->only(['nama', 'tipe','status','view']);
+            $form =  $request->only(['nama', 'tipe','status','view','kategori']);
             $form['slug'] = str_slug($request->nama,'_');
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
@@ -118,7 +118,7 @@ class FormController extends Controller
             }
         }else {
             //form
-            $form =  $request->only(['nama', 'tipe','status','view']);
+            $form =  $request->only(['nama', 'tipe','status','view','kategori']);
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
             }else {
@@ -137,6 +137,7 @@ class FormController extends Controller
             $ket['status'] = $find->status;
             $ket['urutan'] = $find->urutan;
             $ket['view'] = $find->view;
+            $ket['kategori'] = $find->kategori;
             $kets = Form::create($ket);
             $kets->setTextArea()->create(['row'=>2]);
 
@@ -266,7 +267,7 @@ class FormController extends Controller
                 $textarea = ["row"=> 2];
             }
           
-            $form =  $request->only(['nama', 'tipe','status','view']);
+            $form =  $request->only(['nama', 'tipe','status','view','kategori']);
             $form['slug'] = str_slug($request->nama,'_');
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
@@ -292,7 +293,7 @@ class FormController extends Controller
             //         $request->pilihan[$i] = '-';
             //     }
             // }
-            $form =  $request->only(['nama', 'tipe','status','view']);
+            $form =  $request->only(['nama', 'tipe','status','view','kategori']);
             $form['slug'] = str_slug($request->nama,'_');
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
@@ -315,7 +316,7 @@ class FormController extends Controller
             }
         }else {
 
-            $form =  $request->only(['nama', 'tipe','status','view']);
+            $form =  $request->only(['nama', 'tipe','status','view','kategori']);
             $form['slug'] = str_slug($request->nama,'_');
             if ((string)(int)$request->urutan == (string)$request->urutan ){
                $form['urutan'] = $request->urutan;
@@ -338,6 +339,7 @@ class FormController extends Controller
             $ket['slug'] = 'ket_'.str_slug($find->nama,'_');
             $ket['urutan'] = $find->urutan;
             $ket['view'] = $find->view;
+            $ket['kategori'] = $find->kategori;
             $kets = Form::where('nama','keterangan '.$nama)->where('status',$status)->first();
             $kets->update($ket);
 

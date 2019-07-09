@@ -43,32 +43,38 @@
             $('#urutan').removeAttr('readonly','readonly');
             
             $('#view').removeAttr('readonly','readonly');
+            $('#kategori').removeAttr('readonly','readonly');
             $("#view1").iCheck('check');
+            $("#kategori2").iCheck('check');
             // console.log($("input[name='view']:checked").val());
-            $("[name=view]").val(["show"]);
+            // $("[name=view]").val(["show"]);
             $('#form-tipe').show();
 
 
             $('#textarea-set').find('span').remove();
             $('#pilihan-set').find('span').remove();
+
+            $('#form-warning').hide();
+
             $('#tipe').change(function(){
             var tipe= $("#tipe").val();
             if (tipe=='textarea'){
                $('#textarea-set').find('span').remove();
                $('#pilihan-set').find('span').remove();
-
+               $('#form-warning').hide();
                $('#textarea-set').append('<span> <div class=\"form-group {{ $errors->has("row") ? "has-error" : "" }}\"> <label for="row" class="col-md-2 col-md-offset-1" align="right">lebar :</label> <div class="col-md-8"> <input type="text" id="row" name="row" class="form-control" placeholder="10" autofocus required> @if ($errors->has("row")) <span class="help-block"> <strong>{{ $errors->first("row") }}</strong></span> @endif </div></div></span>');
         
             }else if (tipe =='radio' || tipe=='checkbox' || tipe=='select'){
 
               $('#pilihan-set').find('span').remove();
               $('#textarea-set').find('span').remove();
-
+               $('#form-warning').show();
               var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
             }else {
               $('#textarea-set').find('span').remove();
               $('#pilihan-set').find('span').remove();
+              $('#form-warning').hide();             
             }
         });
       }
@@ -118,13 +124,21 @@
             $('#ket-tipe').val(data.tipe);
             $('#ket-tipe').attr('readonly','readonly');
             
+            if(data.kategori == 'formula_pagi'){
+              $("#kategori1").iCheck('check');
+            }else if (data.kategori == 'formula_inti'){
+              $("#kategori2").iCheck('check');
+            }else{
+              $("#kategori3").iCheck('check');
+            }
+              $("#kategori1,#kategori2,#kategori3").iCheck('disable');
+
             if(data.view == 'show'){
               $("#view1").iCheck('check');
             }else{
               $("#view2").iCheck('check');
             }
-              $("#view1").iCheck('disable');
-              $("#view2").iCheck('disable');
+              $("#view1,#view2").iCheck('disable');
 
 // ready function
            if (data.tipe=='textarea'){
@@ -181,13 +195,21 @@
             $('#tipe').val(data.tipe);
             $('#urutan').val(data.urutan);
 
+            if(data.kategori == 'formula_pagi'){
+              $("#kategori1").iCheck('check');
+            }else if (data.kategori == 'formula_inti'){
+              $("#kategori2").iCheck('check');
+            }else{
+              $("#kategori3").iCheck('check');
+            }
+              $("#kategori1,#kategori2,#kategori3").iCheck('enable');
+
             if(data.view == 'show'){
               $("#view1").iCheck('check');
             }else{
               $("#view2").iCheck('check');
             }
-              $("#view1").iCheck('enable');
-              $("#view2").iCheck('enable');
+              $("#view1,#view2").iCheck('enable');
 
             $('#nama').removeAttr('readonly','readonly');
             $('#urutan').removeAttr('readonly','readonly');
@@ -197,17 +219,15 @@
            if (data.tipe=='textarea'){
               $('#textarea-set').find('span').remove();
               $('#pilihan-set').find('span').remove();
+               $('#form-warning').hide();
 
               $('#textarea-set').append('<span> <div class=\"form-group {{ $errors->has("row") ? "has-error" : "" }}\"> <label for="row" class="col-md-2 col-md-offset-1" align="right">lebar :</label> <div class="col-md-8"> <input type="text" id="row" name="row" class="form-control" placeholder="10" autofocus required> @if ($errors->has("row")) <span class="help-block"> <strong>{{ $errors->first("row") }}</strong></span> @endif </div></div></span>');
                 $('#row').val(data.textarea[0].row);
-                // console.log(data.textarea[0].row);
-
         
             }else if (data.tipe =='radio' || data.tipe=='checkbox' || data.tipe=='select'){
-                // console.log(data.pilihan[0]);
-                // console.log(data.count);
                $('#textarea-set').find('span').remove();
                $('#pilihan-set').find('span').remove();
+               $('#form-warning').show();
 
               var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" value="'+data.pilihan[0].nama+'" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
@@ -220,6 +240,7 @@
             }else {
               $('#textarea-set').find('span').remove();
               $('#pilihan-set').find('span').remove();
+               $('#form-warning').hide();            
             }
 // change function
     $('#tipe').change(function(){
@@ -227,9 +248,11 @@
         if (tipe=='textarea'){
            if (data.tipe=='textarea'){
             $('#row').val(data.textarea[0].row);
+             $('#form-warning').hide();
           }else {
            $('#textarea-set').find('span').remove();
            $('#pilihan-set').find('span').remove();
+           $('#form-warning').hide();
            $('#textarea-set').append('<span> <div class=\"form-group {{ $errors->has("row") ? "has-error" : "" }}\"> <label for="row" class="col-md-2 col-md-offset-1" align="right">lebar :</label> <div class="col-md-8"> <input type="text" id="row" name="row" class="form-control" placeholder="10" autofocus required> @if ($errors->has("row")) <span class="help-block"> <strong>{{ $errors->first("row") }}</strong></span> @endif </div></div></span>');
           }
     
@@ -237,6 +260,7 @@
              if (data.tipe=='radio'){
                 $('#pilihan-set').find('span').remove();
                 $('#textarea-set').find('span').remove();
+                $('#form-warning').show();
                var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" value="'+data.pilihan[0].nama+'" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
 
@@ -248,7 +272,7 @@
             }else{
               $('#pilihan-set').find('span').remove();
               $('#textarea-set').find('span').remove();
-
+               $('#form-warning').show();
               var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
                 }
@@ -256,6 +280,7 @@
            if (data.tipe=='checkbox'){
                 $('#pilihan-set').find('span').remove();
                 $('#textarea-set').find('span').remove();
+                $('#form-warning').show();
                var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" value="'+data.pilihan[0].nama+'" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
 
@@ -267,7 +292,7 @@
             }else{
               $('#pilihan-set').find('span').remove();
               $('#textarea-set').find('span').remove();
-
+               $('#form-warning').show();
               var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
                 }
@@ -275,6 +300,7 @@
            if (data.tipe=='select'){
                 $('#pilihan-set').find('span').remove();
                 $('#textarea-set').find('span').remove();
+               $('#form-warning').show();
                var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" value="'+data.pilihan[0].nama+'" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
 
@@ -286,7 +312,7 @@
             }else{
               $('#pilihan-set').find('span').remove();
               $('#textarea-set').find('span').remove();
-
+               $('#form-warning').show();
               var btntambah = "<span class='col-md-1'><button type='button' class='btn btn-success' id='pilihan-tambah'><i class='fa fa-plus' aria-hidden='true'></i></button></span>";
                $('#pilihan-set').append('<span><div class=\"form-group {{ $errors->has("pilihan[]") ? "has-error" : "" }}\"> <label for="pilihan" class="col-md-2 col-md-offset-1" align="right">List pilihan :</label> <div class="col-md-7"> <input type="text" id="pilihan" name="pilihan[]" class="form-control" placeholder="pilihan" autofocus required>  @if ($errors->has("pilihan[]")) <span class="help-block"> <strong>{{ $errors->first("pilihan") }}</strong></span> @endif</div> '+btntambah+'</div></span>');
                 }
@@ -294,6 +320,7 @@
         }else {
           $('#textarea-set').find('span').remove();
           $('#pilihan-set').find('span').remove();
+          $('#form-warning').hide();
         }
     });
 

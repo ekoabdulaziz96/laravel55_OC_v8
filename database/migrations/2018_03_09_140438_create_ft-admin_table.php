@@ -15,13 +15,17 @@ class CreateFtAdminTable extends Migration
     {
         Schema::create('ft_admin', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('acc_kacab',20)->nullable()->default('tidak');
-            $table->string('komentar_kacab',50)->nullable()->default('-');
-            $table->string('acc_direktur',20)->nullable()->default('tidak');
-            $table->string('komentar_direktur',50)->nullable()->default('-');
-            $table->string('acc_manager',20)->nullable()->default('tidak');
-            $table->string('komentar_manager',50)->nullable()->default('-');
-            $table->string('status_laporan',50)->default('on_create');
+            $table->string('acc_kacab',20)->nullable()->default('baru');
+            $table->string('komentar_kacab',999)->nullable()->default('-');
+            $table->boolean('send_kacab')->nullable()->default(false);
+            $table->string('acc_manager',20)->nullable()->default('baru');
+            $table->string('komentar_manager',999)->nullable()->default('-');
+            $table->boolean('send_manager')->nullable()->default(false);
+            $table->string('acc_direktur',20)->nullable()->default('baru');
+            $table->string('komentar_direktur',999)->nullable()->default('-');
+            $table->boolean('send_direktur')->nullable()->default(false);
+
+            $table->string('status_laporan',50)->default('baru');
             // $table->date('created');
             // $table->date('expired');
             $table->integer('user_id')->unsigned();

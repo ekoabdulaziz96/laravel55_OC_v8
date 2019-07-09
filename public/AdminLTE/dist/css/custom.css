@@ -18,6 +18,10 @@
 	background-color: #D96475;
 }
 
+.modal-header-acc ,.modal-footer-acc {
+	background-color: #F0F690;
+}
+
 .label {
 	margin-top: 20px;
 }

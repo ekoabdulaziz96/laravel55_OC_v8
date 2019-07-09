@@ -96,17 +96,8 @@ Bootstrap WYSIHTML5
 
 
 
-<script>
+{{-- <script>
 	 $(function () {
-    //Flat red color scheme for iCheck
-    // $('input[type="checkbox"], input[type="radio"]').iCheck({
-    //   checkboxClass: 'icheckbox_flat-green',
-    //   radioClass   : 'iradio_flat-green'
-    // })
-
-    //Date range picker
-    // $('#reservation').daterangepicker()
-    //Date range picker with time picker
     $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
     //Date picker
     $('.formdatepicker').datepicker({  format: 'yyyy-mm-dd',
@@ -124,4 +115,4 @@ Bootstrap WYSIHTML5
 
   	});
 	
-</script>
+</script> --}}
